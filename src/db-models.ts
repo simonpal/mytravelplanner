@@ -19,6 +19,7 @@ export type Accomodation = {
   travelId: number;
   start: Date;
   end: Date;
+  type: string;
   city?: string;
   address?: string;
   postalCode?: string;

@@ -1,0 +1,12 @@
+.card {
+    border-radius: 8px;
+    background-color: var(--colors-silver);
+    width: 33%;
+    box-shadow: var(--elevation-medium);
+    img {
+        max-width: 100%;
+    }
+    .card-content {
+        padding: 8px;
+    }
+}

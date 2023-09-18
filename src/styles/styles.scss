@@ -153,3 +153,42 @@ textarea {
     padding: var(--spacing-s);
     border: 1px solid #000;
 }
+
+.travel-wrapper {
+    img {
+        border-radius: 0.5rem;
+    }
+}
+
+.travel-dates {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    svg {
+        font-size: 2rem;
+        transform: rotate(180deg);
+    }
+}
+.date-box {
+    width: 80px;
+    height: 80px;
+    background-color: var(--colors-silver);
+    border-radius: 0.5rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    line-height: 160%;
+    .month {
+        text-transform: uppercase;
+        color: var(--colors-primary);
+    }
+    .day {
+        font-weight: bold;
+        font-size: 2rem;
+    }
+    .time {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+}

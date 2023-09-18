@@ -9,6 +9,7 @@ import svLocale from '@fullcalendar/core/locales/sv';
 import Modal from './Modal';
 import { googleMapsUrl } from '@/lib/settings';
 import '@/styles/components/calendar.scss';
+import TimeRange from './TimeRange';
 
 type CalendarProps = {
   travel: Travel;
@@ -20,11 +21,22 @@ export default function Calendar({ travel }: CalendarProps) {
 
   console.log(travel);
 
-  const events: EventInput[] = travel.activities.map((act) => ({
+  const activityEvents: EventInput[] = travel.activities.map((act) => ({
     title: act.title,
     start: act.start,
     end: act.end,
     id: `${act.id}`,
+    color: '#378006',
+    groupId: 'activity',
+    classNames: ['event-clickable'],
+  }));
+  const transferEvents: EventInput[] = travel.transfers.map((act) => ({
+    title: act.title,
+    start: act.start,
+    end: act.end,
+    id: `transfer-${act.id}`,
+    groupId: 'transfer',
+    color: '#B837E5',
   }));
 
   // Url
@@ -36,26 +48,28 @@ export default function Calendar({ travel }: CalendarProps) {
   }, [selectedEvent]);
 
   const handleClick = (ev: EventInput) => {
-    const selectedAct = travel.activities.find((a) => {
-      return `${a.id}` === `${ev.event.id}`;
-    });
+    console.log(ev);
+    if (ev.event.groupId === 'activity') {
+      const selectedAct = travel.activities.find((a) => {
+        return `${a.id}` === `${ev.event.id}`;
+      });
 
-    setSelectedEvent(selectedAct);
-    setShowModal(true);
+      setSelectedEvent(selectedAct);
+      setShowModal(true);
+    }
   };
   console.log('Selected event: ', selectedEvent);
   return (
     <>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin]}
-        initialView="dayGridWeek"
+        initialView="dayGridMonth"
         initialDate={new Date(travel.start)}
-        events={events}
+        events={[...activityEvents, ...transferEvents]}
         weekends={true}
         locales={[svLocale]}
         timeZone="local"
         eventClick={handleClick}
-        eventClassNames={['event-clickable']}
       />
       <Modal
         id="act-modal"
@@ -64,6 +78,10 @@ export default function Calendar({ travel }: CalendarProps) {
         onClose={() => setShowModal(false)}
       >
         <h2>{selectedEvent?.title}</h2>
+        <TimeRange
+          start={new Date(selectedEvent?.start ?? new Date())}
+          end={new Date(selectedEvent?.end ?? new Date())}
+        />
         <a href={googleLink} target="_blank">
           Find on Google Maps
         </a>

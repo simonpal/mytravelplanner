@@ -25,7 +25,7 @@ const Header = ({ user }: HeaderProps) => {
       <Grid spacing="l">
         <Column lg="6" md="6" sm="6" xs="12" className="logo-col">
           <h1>
-            <Link href="/mybudget">
+            <Link href="/mypage">
               <LogoIcon />
               MyTravelPlanner
             </Link>
