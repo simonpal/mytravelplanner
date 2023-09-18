@@ -61,18 +61,20 @@ const NewTravelForm = () => {
       <Divider spacing="s" />
       <Grid spacing="m">
         <Column lg="6" md="6" sm="6" xs="12">
-          <Label htmlFor="start">Start date</Label>
+          <Label htmlFor="start">Start date *</Label>
           <DatePicker
             selected={startDate}
+            required
             name="start"
             id="start"
             onChange={(date) => setStartDate(date)}
           />
         </Column>
         <Column lg="6" md="6" sm="6" xs="12">
-          <Label htmlFor="end">End date</Label>
+          <Label htmlFor="end">End date *</Label>
           <DatePicker
             selected={endDate}
+            required
             name="end"
             id="end"
             onChange={(date) => setEndDate(date)}
@@ -95,7 +97,7 @@ const NewTravelForm = () => {
         </Column>
       </Grid>
       <Divider spacing="m" color="var(--colors-silver)" />
-      <div className="multi-form">
+      {/* <div className="multi-form">
         <h2>Accomodations</h2>
         {accommodations === 0 && (
           <Box spacing="s" alignItems="center">
@@ -153,8 +155,10 @@ const NewTravelForm = () => {
             Add activity +
           </Button>
         </Box>
-      </div>
-      <Button type="submit">Create new travel</Button>
+      </div> */}
+      <Box alignItems="flex-end">
+        <Button type="submit">Create new travel</Button>
+      </Box>
     </form>
   );
 };
